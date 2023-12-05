@@ -2,10 +2,15 @@
   <div id="map"></div>
   <div id="details">
     <div v-if="activeAudio" class="text-center">
+      <!-- <div style="max-width: 25%;">
+        <v-slider v-model="playbackSpeed" :min="0.25" :max="2" :step="0.25" show-ticks="always"  tick-size="4" prepend-icon="mdi-play-speed" thumb-label></v-slider>
+      </div> -->
       [<strong>{{ activeAudio?.id }}</strong>]
       {{ activeAudio?.description }} :
-      <a
-        :href="`http://www.google.com/maps/place/${activeAudio.lat},${activeAudio.lon}`">{{ activeAudio.lat }},{{ activeAudio.lon }}</a>
+      <a :href="`http://www.google.com/maps/place/${activeAudio.lat},${activeAudio.lon}`">{{ activeAudio.lat }},{{
+        activeAudio.lon }}</a>
+      <span style="float:right">{{ currentTime }}</span>
+
     </div>
   </div>
   <div id="audio">
@@ -41,27 +46,33 @@ const audios = config.data;
 const colors = config.colors;
 
 const activeAudio = ref(null)
+const currentTime = ref(0)
+// const playbackSpeed = ref(1)
 let wavesurfer;
 const markers = {};
 
 watch(activeAudio, (after, before) => {
   console.log(`switching ${before?.audio} to ${after?.audio}`)
   wavesurfer?.destroy();
-  if(!wavesurfer){
+  if (!wavesurfer) {
     document.querySelector("#audio").innerHTML = "";
   }
+
   wavesurfer = WaveSurfer.create({
     container: '#audio',
     waveColor: colors.waveColor,
     progressColor: colors.progressColor,
+    cursorColor: colors.cursorColor,
+    cursorWidth: 2,
     url: activeAudio.value.audio,
     autoplay: true,
     normalize: true,
     height: 50,
+    audioRate: 1,
     plugins: [
       // https://wavesurfer.xyz/example/timeline/
       TimelinePlugin.create({
-        height: 20,
+        height: 16,
         timeInterval: 0.1,
         primaryLabelInterval: 0.25,
         style: {
@@ -101,6 +112,9 @@ watch(activeAudio, (after, before) => {
   wavesurfer.on('pause', () => {
     markers[activeAudio.value.id].setIcon(newIcon("play"));
   })
+  wavesurfer.on('timeupdate', (time) => {
+    currentTime.value = `${time.toFixed(3)}s`;
+  });
 
 })
 
@@ -126,22 +140,27 @@ onMounted(() => {
 
   audios.forEach(audio => {
     console.log(audio)
+    const tootlip = L.tooltip({
+      content: audio.label,
+      permanent: true,
+      opacity: 0.5,
+      direction: audio.labelDirection || "top",
+      interactive: true,
+    })
     const marker = new L.marker([audio.lat, audio.lon], { icon: newIcon("play") })
-      .bindTooltip(audio.label, {
-        permanent: true,
-        opacity: 0.5,
-        direction: audio.labelDirection || "top",
-      });
+      .bindTooltip(tootlip);
     let group = new L.FeatureGroup();
     group.addLayer(marker).addTo(map);
-    marker.on("click", () => {
-      console.log(`Marker clicked: ${JSON.stringify(audio)}`)
+    const clickedAudio = () => {
+      console.log(`Clicked: ${JSON.stringify(audio)}`)
       if (activeAudio.value?.id == audio.id) {
         wavesurfer?.playPause();
       } else {
         activeAudio.value = audio;
       }
-    })
+    }
+    tootlip.on("click", clickedAudio);
+    marker.on("click", clickedAudio)
     markers[audio.id] = marker;
   })
   // activeAudio.value = audios[0]; // development
@@ -164,18 +183,39 @@ function initMap() {
 </script>
 
 <style scoped>
+/* html, body {
+  overflow: auto !important;
+} */
+
 #map {
+  /* 216 from the full width content, up to  */
   height: calc(100% - 240px);
   width: 100%;
 }
 
+@media (max-width: 890px) {
+  #map {
+    height: calc(100% - 264px);
+  }
+}
+
+@media (max-width: 465px) {
+  #map {
+    height: calc(100% - 288px);
+  }
+}
+
+
 #audio {
-  height: 220px;
+  /* height: 220px; */
   width: 100%;
 }
 
-#details {
-  height: 20px;
-
+/* make anchors blue but not the default one material design blue */
+a {
+  color: #0288D1;
 }
-</style>
+
+a:hover {
+  color: #01579B;
+}</style>

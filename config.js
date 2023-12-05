@@ -11,15 +11,16 @@ const config = {
     startTile: 'satellite',
     tiles: {
       osm: () => `https://tile.openstreetmap.org/{z}/{x}/{y}.png`,
-      satellite: (token) => `https://api.mapbox.com/styles/v1/bellingcat-mapbox/clpsadwuy018v01o95zsp9sfo/wmts?access_token=${token}`,
+      satellite: (token) => `https://api.mapbox.com/styles/v1/bellingcat-mapbox/clpsadwuy018v01o95zsp9sfo/tiles/256/{z}/{x}/{y}@2x?access_token=${token}`,
       custom: (token) => `https://api.mapbox.com/styles/v1/bellingcat-mapbox/cl0qnou2y003m15s8ieuyhgsy/tiles/256/{z}/{x}/{y}@2x?access_token=${token}`,
     },
   },
 
-  colors:{
+  colors: {
     iconColor: "#93FF00",
     waveColor: '#8C9EFF',
     progressColor: '#304FFE',
+    cursorColor: '#FF6D00',
     timelineFontColor: '#558B2F'
   },
   data: [
@@ -32,11 +33,10 @@ const config = {
     {
       id: "04_02_01",
       label: "04_02_01",
+      labelDirection: "right",
       lat: 3.169865,
       lon: -76.244035,
       audio: "04_02_01_14s.wav",
-      drive: "https://drive.google.com/file/d/1GVmWVu5Yn7tzzsKPHQ62qjh545C-DKO0/view",
-      splitChannels: true,
       description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
@@ -46,35 +46,33 @@ const config = {
       lat: 3.170281,
       lon: -76.244906,
       audio: "04_02_02_1s.wav",
-      drive: "https://drive.google.com/file/d/1vch7FloYGuLCyeWv7cLO_WW4M5cwa3wU/view",
       description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
       id: "04_02_03",
       label: "04_02_03",
-      labelDirection: "bottom",
+      labelDirection: "left",
       lat: 3.170245,
       lon: -76.244941,
       audio: "04_02_03_0s.wav",
-      drive: "https://drive.google.com/file/d/1aX7hkdO4w4nKXqarbkCoeaaHIyUOAIve/view",
       description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
       id: "04_01_04",
       label: "04_01_04",
+      labelDirection: "right",
       lat: 3.170550,
       lon: -76.244705,
       audio: "04_01_04_52s.wav",
-      drive: "https://drive.google.com/file/d/1wAPJdDo1WmuPEClEEHDhm5-CuNyAfhjt/view",
       description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
       id: "04_01_06",
       label: "04_01_06",
+      labelDirection: "right",
       lat: 3.168388,
       lon: -76.244574,
       audio: "04_01_06_31s.wav",
-      drive: "https://drive.google.com/file/d/1CUSh91sVGhxstWcro_XKcubG-TTVDnR-/view",
       description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data"
     },
     {
@@ -83,7 +81,6 @@ const config = {
       lat: 3.164874,
       lon: -76.239899,
       audio: "04_01_07_25s.wav",
-      drive: "https://drive.google.com/file/d/1e0xcJPW4FxNPepaeaWcIVUTA2_lDGU1o/view",
       description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data"
     }
   ]
