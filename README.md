@@ -4,7 +4,7 @@ Vue visualization using [https://wavesurfer.xyz](wavesurfer.js) and [leafletjs](
 
 To embed the deployed version:
 ```html
-<iframe src="https://bellingcat.github.io/who-killed-abelardo/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen; clipboard-write; "></iframe>
+<iframe src="https://bellingcat.github.io/who-killed-abelardo/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen;"></iframe>
 ```
 
 
