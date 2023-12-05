@@ -17,7 +17,7 @@ const config = {
   },
 
   colors: {
-    iconColor: "#93FF00",
+    iconColor: "#ffbf00",
     waveColor: '#8C9EFF',
     progressColor: '#304FFE',
     cursorColor: '#FF6D00',
