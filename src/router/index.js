@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/',
+    path: '/who-killed-abelardo/',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
