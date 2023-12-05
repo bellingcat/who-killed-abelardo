@@ -73,6 +73,7 @@ watch(activeAudio, (after, before) => {
         primaryLabelInterval: 0.25,
         style: {
           fontSize: '12px',
+          fontWeight: 'bold',
           color: colors.timelineFontColor,
         },
       })

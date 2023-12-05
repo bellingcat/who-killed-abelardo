@@ -18,10 +18,10 @@ const config = {
 
   colors: {
     iconColor: "#ffbf00",
-    waveColor: '#8C9EFF',
-    progressColor: '#304FFE',
+    waveColor: '#bf9b30',
+    progressColor: '#926c15',
     cursorColor: '#FF6D00',
-    timelineFontColor: '#558B2F'
+    timelineFontColor: '#805b10'
   },
   data: [
     // 04_02_01 (3.169865,-76.244035)
