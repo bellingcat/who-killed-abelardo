@@ -1,4 +1,6 @@
-# base
+# `Who killed Abelardo` geolocated-sound-visualization
+
+Vue visualization using [https://wavesurfer.xyz](wavesurfer.js) and [leafletjs](https://leafletjs.com/).
 
 To embed the deployed version:
 ```html
@@ -11,71 +13,19 @@ To test the embedding in local development use:
 <iframe src="http://localhost:3000/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen; clipboard-write; "></iframe>
 ```
 
+### Development
 
-## Project setup
-
-```
-# yarn
+```bash
+# Project setup
 yarn
 
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# pnpm
-bun install
-```
-
-### Compiles and hot-reloads for development
-
-```
-# yarn
+# Compiles and hot-reloads for development
 yarn dev
 
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# bun
-bun run dev
-```
-
-### Compiles and minifies for production
-
-```
-# yarn
+# Compiles and minifies for production
 yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# bun
 bun run build
-```
 
-### Lints and fixes files
-
-```
-# yarn
+# Lints and fixes files
 yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-
-# bun
-bun run lint
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).

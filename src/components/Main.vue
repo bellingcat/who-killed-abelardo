@@ -2,9 +2,6 @@
   <div id="map"></div>
   <div id="details">
     <div v-if="activeAudio" class="text-center">
-      <!-- <div style="max-width: 25%;">
-        <v-slider v-model="playbackSpeed" :min="0.25" :max="2" :step="0.25" show-ticks="always"  tick-size="4" prepend-icon="mdi-play-speed" thumb-label></v-slider>
-      </div> -->
       [<strong>{{ activeAudio?.id }}</strong>]
       {{ activeAudio?.description }} :
       <a :href="`http://www.google.com/maps/place/${activeAudio.lat},${activeAudio.lon}`">{{ activeAudio.lat }},{{
@@ -47,7 +44,6 @@ const colors = config.colors;
 
 const activeAudio = ref(null)
 const currentTime = ref(0)
-// const playbackSpeed = ref(1)
 let wavesurfer;
 const markers = {};
 
@@ -120,7 +116,7 @@ watch(activeAudio, (after, before) => {
 
 const newIcon = (shape, size) => {
   //https://fonts.google.com/icons?selected=Material+Symbols+Outlined:pause:FILL@0;wght@400;GRAD@0;opsz@24&icon.query=pause
-  size = size || 40;
+  size = size || 35;
   const svg = {
     "play": `<path d="M320-200v-560l440 280-440 280Zm80-280Zm0 134 210-134-210-134v268Z"/>`,
     "pause": `<path d="M520-200v-560h240v560H520Zm-320 0v-560h240v560H200Zm400-80h80v-400h-80v400Zm-320 0h80v-400h-80v400Zm0-400v400-400Zm320 0v400-400Z"/>`,
@@ -152,7 +148,7 @@ onMounted(() => {
     let group = new L.FeatureGroup();
     group.addLayer(marker).addTo(map);
     const clickedAudio = () => {
-      console.log(`Clicked: ${JSON.stringify(audio)}`)
+      // console.log(`Clicked: ${JSON.stringify(audio)}`)
       if (activeAudio.value?.id == audio.id) {
         wavesurfer?.playPause();
       } else {
@@ -160,7 +156,7 @@ onMounted(() => {
       }
     }
     tootlip.on("click", clickedAudio);
-    marker.on("click", clickedAudio)
+    marker.on("click", clickedAudio);
     markers[audio.id] = marker;
   })
   // activeAudio.value = audios[0]; // development
