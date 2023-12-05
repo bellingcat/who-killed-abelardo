@@ -1,11 +1,15 @@
 # base
 
 To embed the deployed version:
-`<iframe src="https://bellingcat.github.io/who-killed-abelardo/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen; clipboard-write; "></iframe>`
+```html
+<iframe src="https://bellingcat.github.io/who-killed-abelardo/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen; clipboard-write; "></iframe>
+```
 
 
 To test the embedding in local development use:
-`<iframe src="http://localhost:3000/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen; clipboard-write; "></iframe>`
+```html
+<iframe src="http://localhost:3000/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen; clipboard-write; "></iframe>
+```
 
 
 ## Project setup

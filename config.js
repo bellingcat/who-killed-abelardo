@@ -1,20 +1,26 @@
 const config = {
   map: {
     anchor: { lat: 3.1680492399285916, lon: -76.24325716421255 },
-    // anchor: { lat: 40.172841, lon: 70.862127 }, //dev
     // maxZoom: 20,
+    // maxNativeZoom: 20,
     minZoom: 4,
     startZoom: 15,
     wheelPxPerZoomLevel: 120,
     zoomSnap: 0.50,
     mapboxToken: "pk.eyJ1IjoiYmVsbGluZ2NhdC1tYXBib3giLCJhIjoiY2tleW0wbWliMDA1cTJ5bzdkbTRraHgwZSJ9.GJQkjPzj8554VhR5SPsfJg",
     startTile: 'satellite',
-    // startTile: 'satellite', // dev
     tiles: {
       osm: () => `https://tile.openstreetmap.org/{z}/{x}/{y}.png`,
-      satellite: (token) => `https://api.mapbox.com/styles/v1/bellingcat-mapbox/cl1win2vp003914pdhateva6p/tiles/256/{z}/{x}/{y}@2x?access_token=${token}`,
+      satellite: (token) => `https://api.mapbox.com/styles/v1/bellingcat-mapbox/clpsadwuy018v01o95zsp9sfo/wmts?access_token=${token}`,
       custom: (token) => `https://api.mapbox.com/styles/v1/bellingcat-mapbox/cl0qnou2y003m15s8ieuyhgsy/tiles/256/{z}/{x}/{y}@2x?access_token=${token}`,
     },
+  },
+
+  colors:{
+    iconColor: "#93FF00",
+    waveColor: '#8C9EFF',
+    progressColor: '#304FFE',
+    timelineFontColor: '#558B2F'
   },
   data: [
     // 04_02_01 (3.169865,-76.244035)
@@ -30,7 +36,8 @@ const config = {
       lon: -76.244035,
       audio: "04_02_01_14s.wav",
       drive: "https://drive.google.com/file/d/1GVmWVu5Yn7tzzsKPHQ62qjh545C-DKO0/view",
-      splitChannels: true
+      splitChannels: true,
+      description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
       id: "04_02_02",
@@ -39,7 +46,8 @@ const config = {
       lat: 3.170281,
       lon: -76.244906,
       audio: "04_02_02_1s.wav",
-      drive: "https://drive.google.com/file/d/1vch7FloYGuLCyeWv7cLO_WW4M5cwa3wU/view"
+      drive: "https://drive.google.com/file/d/1vch7FloYGuLCyeWv7cLO_WW4M5cwa3wU/view",
+      description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
       id: "04_02_03",
@@ -48,7 +56,8 @@ const config = {
       lat: 3.170245,
       lon: -76.244941,
       audio: "04_02_03_0s.wav",
-      drive: "https://drive.google.com/file/d/1aX7hkdO4w4nKXqarbkCoeaaHIyUOAIve/view"
+      drive: "https://drive.google.com/file/d/1aX7hkdO4w4nKXqarbkCoeaaHIyUOAIve/view",
+      description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
       id: "04_01_04",
@@ -56,7 +65,8 @@ const config = {
       lat: 3.170550,
       lon: -76.244705,
       audio: "04_01_04_52s.wav",
-      drive: "https://drive.google.com/file/d/1wAPJdDo1WmuPEClEEHDhm5-CuNyAfhjt/view"
+      drive: "https://drive.google.com/file/d/1wAPJdDo1WmuPEClEEHDhm5-CuNyAfhjt/view",
+      description: "Clear corresponding shockwave-muzzle blast pairs"
     },
     {
       id: "04_01_06",
@@ -64,7 +74,8 @@ const config = {
       lat: 3.168388,
       lon: -76.244574,
       audio: "04_01_06_31s.wav",
-      drive: "https://drive.google.com/file/d/1CUSh91sVGhxstWcro_XKcubG-TTVDnR-/view"
+      drive: "https://drive.google.com/file/d/1CUSh91sVGhxstWcro_XKcubG-TTVDnR-/view",
+      description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data"
     },
     {
       id: "04_01_07",
@@ -72,7 +83,8 @@ const config = {
       lat: 3.164874,
       lon: -76.239899,
       audio: "04_01_07_25s.wav",
-      drive: "https://drive.google.com/file/d/1e0xcJPW4FxNPepaeaWcIVUTA2_lDGU1o/view"
+      drive: "https://drive.google.com/file/d/1e0xcJPW4FxNPepaeaWcIVUTA2_lDGU1o/view",
+      description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data"
     }
   ]
 };

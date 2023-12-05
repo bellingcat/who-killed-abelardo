@@ -1,6 +1,25 @@
 <template>
   <div id="map"></div>
-  <div id="audio"></div>
+  <div id="details">
+    <div v-if="activeAudio" class="text-center">
+      [<strong>{{ activeAudio?.id }}</strong>]
+      {{ activeAudio?.description }} :
+      <a
+        :href="`http://www.google.com/maps/place/${activeAudio.lat},${activeAudio.lon}`">{{ activeAudio.lat }},{{ activeAudio.lon }}</a>
+    </div>
+  </div>
+  <div id="audio">
+    <v-container class="fill-height">
+      <v-row>
+        <v-col>
+          <h3 class="text-center">
+            Please select a marker on the map to hear the audio from that location.
+          </h3>
+        </v-col>
+      </v-row>
+    </v-container>
+
+  </div>
 </template>
 
 <script setup>
@@ -19,6 +38,7 @@ import colormap from "colormap";
 let map;
 const mapConfig = config.map;
 const audios = config.data;
+const colors = config.colors;
 
 const activeAudio = ref(null)
 let wavesurfer;
@@ -27,15 +47,17 @@ const markers = {};
 watch(activeAudio, (after, before) => {
   console.log(`switching ${before?.audio} to ${after?.audio}`)
   wavesurfer?.destroy();
-
+  if(!wavesurfer){
+    document.querySelector("#audio").innerHTML = "";
+  }
   wavesurfer = WaveSurfer.create({
     container: '#audio',
-    waveColor: '#4F4A85',
-    progressColor: '#383351',
+    waveColor: colors.waveColor,
+    progressColor: colors.progressColor,
     url: activeAudio.value.audio,
     autoplay: true,
     normalize: true,
-    height: 100,
+    height: 50,
     plugins: [
       // https://wavesurfer.xyz/example/timeline/
       TimelinePlugin.create({
@@ -44,7 +66,7 @@ watch(activeAudio, (after, before) => {
         primaryLabelInterval: 0.25,
         style: {
           fontSize: '12px',
-          color: '#6A3274',
+          color: colors.timelineFontColor,
         },
       })
     ],
@@ -54,11 +76,12 @@ watch(activeAudio, (after, before) => {
   wavesurfer.registerPlugin(
     Spectrogram.create({
       labels: true,
-      height: 100,
-      splitChannels: false, //TODO: check none has 2 channels
+      height: 150,
+      splitChannels: false,
       // https://www.npmjs.com/package/colormap
       colorMap: colormap({
-        colormap: 'density',
+        // cool, density, yignbu, salinity, temperature, velocity-blue
+        colormap: 'cool',
         nshades: 256,
         format: 'float'
       })
@@ -72,6 +95,7 @@ watch(activeAudio, (after, before) => {
     wavesurfer.playPause()
   })
   wavesurfer.on('play', () => {
+    Object.values(markers).forEach(marker => marker.setIcon(newIcon("play")));
     markers[activeAudio.value.id].setIcon(newIcon("pause"));
   })
   wavesurfer.on('pause', () => {
@@ -90,7 +114,7 @@ const newIcon = (shape, size) => {
   }[shape || "play"];
 
   return L.divIcon({
-    html: `<svg xmlns="http://www.w3.org/2000/svg" height="${size}" fill="orange" stroke="blue" stroke-width="0" viewBox="0 -960 960 960" width="${size}">${svg}</svg>`,
+    html: `<svg xmlns="http://www.w3.org/2000/svg" height="${size}" fill="${colors.iconColor}" stroke="blue" stroke-width="0" viewBox="0 -960 960 960" width="${size}">${svg}</svg>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
     className: "leaflet-div-icon2"
@@ -100,11 +124,6 @@ const newIcon = (shape, size) => {
 onMounted(() => {
   initMap();
 
-  const icons = {
-    default: newIcon(),
-    selected: newIcon(48)
-  }
-
   audios.forEach(audio => {
     console.log(audio)
     const marker = new L.marker([audio.lat, audio.lon], { icon: newIcon("play") })
@@ -113,7 +132,7 @@ onMounted(() => {
         opacity: 0.5,
         direction: audio.labelDirection || "top",
       });
-    let group = new L.FeatureGroup(); // used for fitBounds
+    let group = new L.FeatureGroup();
     group.addLayer(marker).addTo(map);
     marker.on("click", () => {
       console.log(`Marker clicked: ${JSON.stringify(audio)}`)
@@ -125,6 +144,7 @@ onMounted(() => {
     })
     markers[audio.id] = marker;
   })
+  // activeAudio.value = audios[0]; // development
 
 })
 function initMap() {
@@ -135,8 +155,9 @@ function initMap() {
   L.tileLayer(tileUrl, {
     attribution:
       // tileUrl.includes("openstreetmap") ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' :
-      "&copy;<a href='https://www.mapbox.com/about/maps/'>Mapbox</a> <small><strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>improve this map</a></strong></small>"
-    // https://wavesurfer.xyz/
+      "&copy;<a href='https://www.mapbox.com/about/maps/'>Mapbox</a> <small><strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>improve this map</a></strong></small>",
+    maxNativeZoom: 18,
+    maxZoom: 22
   }).addTo(map);
 }
 
@@ -144,12 +165,17 @@ function initMap() {
 
 <style scoped>
 #map {
-  height: calc(100% - 220px);
+  height: calc(100% - 240px);
   width: 100%;
 }
 
 #audio {
   height: 220px;
   width: 100%;
+}
+
+#details {
+  height: 20px;
+
 }
 </style>
