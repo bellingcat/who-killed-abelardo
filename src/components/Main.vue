@@ -14,9 +14,10 @@
     <v-container class="fill-height">
       <v-row>
         <v-col>
-          <h3 class="text-center">
-            Please select a marker on the map to hear the audio from that location.
-          </h3>
+          <h2 class="text-center">
+            <span id="interactive">Interactive Map.</span> Select a marker on the map to hear the audio recorded in
+            that location.
+          </h2>
         </v-col>
       </v-row>
     </v-container>
@@ -215,4 +216,22 @@ a {
 
 a:hover {
   color: #01579B;
+}
+
+@keyframes heartbeat {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+#interactive {
+  display: inline-block;
+  animation: heartbeat 1.5s infinite;
 }</style>
+
