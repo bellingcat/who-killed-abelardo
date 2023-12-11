@@ -14,9 +14,11 @@
     <v-container class="fill-height">
       <v-row>
         <v-col>
-          <h2 class="text-center">
-            <span id="interactive">Interactive Map.</span> Select a marker on the map to hear the audio recorded in
-            that location.
+          <h2 class="text-center" v-if="params.lang != 'es'">
+            <span id="interactive">Interactive Map.</span> Select a marker on the map to hear the audio recorded in that location.
+          </h2>
+          <h2 class="text-center" v-if="params.lang == 'es'">
+            <span id="interactive">Mapa interactivo.</span>  Seleccione un marcador en el mapa para escuchar el audio grabado en esa ubicación.
           </h2>
         </v-col>
       </v-row>
@@ -38,11 +40,16 @@ import TimelinePlugin from 'https://unpkg.com/wavesurfer.js@7/dist/plugins/timel
 
 import colormap from "colormap";
 
+const params = new Proxy(new URLSearchParams(window.location.search), {
+  get: (searchParams, prop) => searchParams.get(prop),
+});
+
 let map;
 const mapConfig = config.map;
 const audios = config.data;
 const colors = config.colors;
 
+// const displayMessage = params.lang == "es" ? "Cliquez sur un marqueur pour écouter l'audio enregistré à cet endroit." : "Click on a marker to hear the audio recorded at that location.";
 const activeAudio = ref(null)
 const currentTime = ref(0)
 let wavesurfer;
@@ -233,5 +240,6 @@ a:hover {
 #interactive {
   display: inline-block;
   animation: heartbeat 1.5s infinite;
-}</style>
+}
+</style>
 
