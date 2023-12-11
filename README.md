@@ -7,11 +7,13 @@ To embed the deployed version:
 <iframe src="https://bellingcat.github.io/who-killed-abelardo/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen;"></iframe>
 ```
 
-
 To test the embedding in local development use:
 ```html
 <iframe src="http://localhost:3000/" title="Who killed Abelardo" height="500" width="100%" allow="fullscreen; clipboard-write; "></iframe>
 ```
+
+pass `?lang=es` to get the initial text displayed in Spanish.
+
 
 ### Development
 

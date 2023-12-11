@@ -3,7 +3,7 @@
   <div id="details">
     <div v-if="activeAudio" class="text-center">
       [<strong>{{ activeAudio?.id }}</strong>]
-      {{ activeAudio?.description }} :
+      {{ params.lang == 'es'? activeAudio?.description_es : activeAudio?.description }} :
       <a :href="`http://www.google.com/maps/place/${activeAudio.lat},${activeAudio.lon}`">{{ activeAudio.lat }},{{
         activeAudio.lon }}</a>
       <span style="float:right">{{ currentTime }}</span>

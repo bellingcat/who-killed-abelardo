@@ -37,7 +37,8 @@ const config = {
       lat: 3.169865,
       lon: -76.244035,
       audio: "04_02_01_14s.wav",
-      description: "Clear corresponding shockwave-muzzle blast pairs"
+      description: "Clear corresponding shockwave-muzzle blast pairs",
+      description_es: "Claramente se escuchan las ondas de choque seguidas de las respectivas explosiones de cañón",
     },
     {
       id: "04_02_02",
@@ -46,7 +47,8 @@ const config = {
       lat: 3.170281,
       lon: -76.244906,
       audio: "04_02_02_1s.wav",
-      description: "Clear corresponding shockwave-muzzle blast pairs"
+      description: "Clear corresponding shockwave-muzzle blast pairs",
+      description_es: "Claramente se escuchan las ondas de choque seguidas de las respectivas explosiones de cañón",
     },
     {
       id: "04_02_03",
@@ -55,7 +57,8 @@ const config = {
       lat: 3.170245,
       lon: -76.244941,
       audio: "04_02_03_0s.wav",
-      description: "Clear corresponding shockwave-muzzle blast pairs"
+      description: "Clear corresponding shockwave-muzzle blast pairs",
+      description_es: "Claramente se escuchan las ondas de choque seguidas de las respectivas explosiones de cañón",
     },
     {
       id: "04_01_04",
@@ -64,7 +67,8 @@ const config = {
       lat: 3.170550,
       lon: -76.244705,
       audio: "04_01_04_52s.wav",
-      description: "Clear corresponding shockwave-muzzle blast pairs"
+      description: "Clear corresponding shockwave-muzzle blast pairs",
+      description_es: "Claramente se escuchan las ondas de choque seguidas de las respectivas explosiones de cañón",
     },
     {
       id: "04_01_06",
@@ -73,7 +77,8 @@ const config = {
       lat: 3.168388,
       lon: -76.244574,
       audio: "04_01_06_31s.wav",
-      description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data"
+      description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data",
+      description_es: "Solo se escuchan explosiones de cañón. Las ondas de choque no parecen estar presente en el material disponible"
     },
     {
       id: "04_01_07",
@@ -81,7 +86,8 @@ const config = {
       lat: 3.164874,
       lon: -76.239899,
       audio: "04_01_07_25s.wav",
-      description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data"
+      description: "Clear distant muzzle blasts only. Shockwaves seem to be absent on available data",
+      description_es: "Solo se escuchan explosiones de cañón. Las ondas de choque no parecen estar presente en el material disponible"
     }
   ]
 };
